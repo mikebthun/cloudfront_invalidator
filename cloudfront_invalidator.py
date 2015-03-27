@@ -34,17 +34,19 @@ def git_to_invalidate_format(path):
 
   cmd = "git ls-files"
 
+
+
   (status,output) = commands.getstatusoutput(cmd)
 
   if status>0:
-    logger.error("Could not run %s: %s\n%s", cmd, output)
+    logger.error("Could not run %s: %s" % ( cmd, output))
     sys.exit(2)
 
   files = output.split('\n')
 
   modified_files = ["%s%s" % (path, f.strip()) for f in files if f not in ignores ]
 
-
+ 
   return ",".join(modified_files)
  
 
